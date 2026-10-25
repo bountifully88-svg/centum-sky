@@ -440,6 +440,38 @@
   .nav .btn.nav-reg:hover{background:#d6b88f;transform:none}
   .nav .btn.nav-reg:hover span{transform:translate(2px,-2px)}
   @media (max-width:860px){.nav .btn.nav-reg{height:42px;padding:0 14px;font-size:15px;gap:6px}.nav .btn.nav-reg span{font-size:15px}}
+  /* ===== 특별한 계약조건 패널 ===== */
+  .offer{max-width:760px;margin:0 auto;padding:clamp(26px,4vw,44px) clamp(18px,3.4vw,40px);text-align:center;font-family:"Pretendard",var(--sans);border-radius:18px;
+    background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 2px,transparent 2px 22px),linear-gradient(160deg,#1e3766 0%,#13244a 55%,#0c1834 100%);box-shadow:0 26px 50px rgba(8,15,32,.35)}
+  .offer-title{font-size:clamp(32px,5.4vw,52px);font-weight:800;letter-spacing:-.04em;color:#fff;line-height:1.2;margin-bottom:clamp(20px,3vw,30px)}
+  .offer-title em,.offer-list em{font-style:normal;background:linear-gradient(180deg,#fff2c2 0%,#f0cf7c 45%,#c79a3d 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .offer-list{list-style:none;display:grid;gap:clamp(12px,1.8vw,16px)}
+  .offer-list li{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .35em;padding:clamp(14px,2.2vw,20px) 18px clamp(14px,2.2vw,20px) clamp(54px,7vw,70px);text-align:left;
+    font-size:clamp(20px,3.4vw,30px);font-weight:700;letter-spacing:-.03em;color:#fff;background:linear-gradient(180deg,#1d3a6e,#142a52);
+    border:2px solid #d8b468;outline:1px solid rgba(216,180,104,.45);outline-offset:4px;margin:5px}
+  .offer-list li::before{content:"";position:absolute;left:clamp(16px,2.4vw,24px);top:50%;width:clamp(20px,2.6vw,26px);height:clamp(11px,1.4vw,14px);border-left:4px solid #f0cf7c;border-bottom:4px solid #f0cf7c;transform:translateY(-70%) rotate(-45deg)}
+  .offer-list small{font-size:.58em;font-weight:600;color:rgba(255,255,255,.75)}
+  .offer-cta{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(22px,3vw,30px);height:56px;padding:0 34px;background:#c8a77c;color:#14171f;font-size:18px;font-weight:800;transition:background .2s}
+  .offer-cta:hover{background:#d6b88f}
+  @media (max-width:520px){.offer{border-radius:12px}.offer-list li{margin:4px}.offer-cta{width:100%;justify-content:center}}
+
+  /* ===== 모바일 하단바 (방문예약 / 팝업보기 / 분양문의) ===== */
+  .qbar{display:none}
+  @media (max-width:860px){
+    .qbar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:75;padding:8px 8px calc(8px + env(safe-area-inset-bottom));
+      background:rgba(255,255,255,.0);font-family:"Pretendard",var(--sans);transition:transform .3s ease}
+    .qbar.hide{transform:translateY(120%)}
+    .qbar a,.qbar button{display:flex;align-items:center;justify-content:center;gap:7px;height:52px;border:0;border-radius:8px;color:#fff;font:inherit;font-size:18px;font-weight:800;letter-spacing:-.03em;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.22)}
+    .qbar svg{width:20px;height:20px;flex:0 0 auto}
+    .qbar-visit{background:#2f6aa3}
+    .qbar-pop{background:var(--navy-800);padding:0 18px}
+    .qbar-tel{grid-column:1/-1;justify-content:space-between !important;padding:0 18px;background:#555a61}
+    .qbar-tel b{display:flex;align-items:center;gap:7px;font-size:23px;font-weight:800;letter-spacing:-.01em}
+    .qbar-tel span{font-size:17px;font-weight:700}
+    .fab{display:none !important}
+    footer{padding-bottom:calc(140px + env(safe-area-inset-bottom)) !important}
+  }
+
   /* ===== 모션 ===== */
   /* 1) 첫 화면: 사진이 천천히 다가오고, 문구가 차례로 떠오름 */
   @keyframes heroZoom{from{transform:scale(1.12)}to{transform:scale(1)}}
@@ -594,15 +626,18 @@
 <!-- CONDITIONS -->
 <section class="cond" id="cond">
   <div class="wrap">
-    <p class="eyebrow">Overview</p>
-    <h2 class="h2">한눈에 보는 사업 개요</h2>
-    <p class="lead">대전 원도심 대흥동에 들어서는 대전 경남아너스빌 센텀스카이입니다.</p>
-    <div class="cond-grid">
-      <div class="cond-card"><p class="k">위치</p><p class="v">대전 중구<br>대흥동 38-17</p><p class="s">번지 일대</p></div>
-      <div class="cond-card"><p class="k">규모</p><p class="v">지하 3층 ~<br>지상 35층</p><p class="s">2개 동 (101 · 102동)</p></div>
-      <div class="cond-card"><p class="k">구성</p><p class="v">아파트 142세대<br>오피스텔 48실</p><p class="s">근린생활시설 1실 포함 총 190</p></div>
-      <div class="cond-card"><p class="k">타입</p><p class="v">84A · 84B · 84C<br>103O · 109O</p><p class="s">아파트 / 오피스텔</p></div>
+    <!-- 특별한 계약조건 패널 (내용은 여기서 수정) -->
+    <div class="offer" aria-label="특별한 계약조건">
+      <h2 class="offer-title">특별한 <em>계약조건</em></h2>
+      <ul class="offer-list">
+        <li>중도금 <em>전액 무이자</em></li>
+        <li>계약금 <em>실부담 0원</em><small>(상담 문의)</small></li>
+        <li>발코니 확장비 <em>무상</em></li>
+        <li>에어컨 4대 · 중문 <em>무상 제공</em></li>
+      </ul>
+      <a class="offer-cta" href="#reserve">계약조건 상담 신청 <span aria-hidden="true">↗</span></a>
     </div>
+    <p class="note" style="margin-top:12px">※ 계약 조건과 무상 제공 품목은 타입·동·호수 및 계약 시점에 따라 달라질 수 있으며, 조기 종료될 수 있습니다. 적용 대상과 세부 내용은 분양 상담 및 계약서를 통해 반드시 확인하시기 바랍니다.</p>
     <div class="imgtabs light" data-imgtabs>
       <div class="imgtabs-btns" role="tablist" aria-label="사업개요 이미지">
         <button type="button" role="tab" aria-selected="true" data-src="images/view-day.jpg" data-alt="센텀스카이 조감도">조감도</button>
@@ -870,6 +905,13 @@
   </div>
 </footer>
 
+<!-- 모바일 하단바 (방문예약 / 팝업보기 / 분양문의) -->
+<nav class="qbar" id="qbar" aria-label="빠른 메뉴">
+  <a class="qbar-visit" href="#reserve"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6z"/></svg>방문예약</a>
+  <button type="button" class="qbar-pop" id="qbarPop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></svg>팝업보기</button>
+  <a class="qbar-tel" href="tel:16680509" aria-label="분양문의 1668-0509 전화 걸기"><span>분양문의</span><b><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>1668-0509</b></a>
+</nav>
+
 <!-- 떠 있는 원형 버튼 -->
 <div class="fab" aria-label="빠른 상담">
   <a class="fab-btn fab-call" href="tel:16680509" aria-label="전화상담 1668-0509">
@@ -895,7 +937,7 @@
     // 스크롤 등장: 대상에 reveal을 붙이고, 화면에 들어오면 in을 붙임
     const targets = document.querySelectorAll(
       'section:not(.hero) .eyebrow, section:not(.hero) .h2, section:not(.hero) .lead, .cond-card, .prem-title, .prem, ' +
-      '.locview-in > *, .plan-box, .imgtabs, .up-types, .up-grid > *, .comm, .remain-box, .reserve-grid > *, .loc-grid > *');
+      '.offer, .locview-in > *, .plan-box, .imgtabs, .up-types, .up-grid > *, .comm, .remain-box, .reserve-grid > *, .loc-grid > *');
     targets.forEach(el => {
       el.classList.add('reveal');
       // 같은 줄에 나란히 있는 카드는 왼쪽부터 차례로
@@ -993,6 +1035,17 @@
     }));
     img.addEventListener('click', () => window.open(img.dataset.full || img.src, '_blank', 'noopener'));
   });
+
+  // 하단바: 팝업 다시 보기, 신청서 작성 중에는 숨김
+  (function () {
+    const bar = document.getElementById('qbar'), pop = document.getElementById('heroPop'), form = document.getElementById('leadForm');
+    if (!bar) return;
+    const btn = document.getElementById('qbarPop');
+    if (btn && pop) btn.addEventListener('click', () => pop.classList.remove('closed'));
+    else if (btn) btn.remove();
+    if (form && 'IntersectionObserver' in window)
+      new IntersectionObserver(es => bar.classList.toggle('hide', es[0].isIntersecting), { threshold: 0.25 }).observe(form);
+  })();
 
   // 스크롤 시 헤더 배경
   const hdr = document.getElementById('hdr');
